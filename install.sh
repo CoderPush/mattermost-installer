@@ -35,7 +35,7 @@ read -sp 'ENTER DATABASE PASSWORD : ' dbpassword
 
 echo
 
-
+echo STARTING MATTERMOST INSTALLATION FOR $domain
 
 
 
@@ -69,7 +69,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "SiteURL": "https://$domain",
     "WebsocketURL": "",
     "LicenseFileLocation": "",
-    "ListenAddress": ":8000",
+    "ListenAddress": ":8065",
     "ConnectionSecurity": "",
     "TLSCertFile": "",
     "TLSKeyFile": "",
@@ -80,6 +80,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "UseLetsEncrypt": false,
     "LetsEncryptCertificateCacheFile": "./config/letsencrypt.cache",
     "Forward80To443": false,
+    "TrustedProxyIPHeader": [],
     "ReadTimeout": 300,
     "WriteTimeout": 300,
     "MaximumLoginAttempts": 10,
@@ -92,7 +93,6 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "EnableOnlyAdminIntegrations": true,
     "EnablePostUsernameOverride": false,
     "EnablePostIconOverride": false,
-    "EnableAPIv3": false,
     "EnableLinkPreviews": false,
     "EnableTesting": false,
     "EnableDeveloper": false,
@@ -107,11 +107,11 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "CorsAllowCredentials": false,
     "CorsDebug": false,
     "AllowCookiesForSubdomains": false,
-    "SessionLengthWebInDays": 30,
-    "SessionLengthMobileInDays": 30,
+    "SessionLengthWebInDays": 180,
+    "SessionLengthMobileInDays": 180,
     "SessionLengthSSOInDays": 30,
     "SessionCacheInMinutes": 10,
-    "SessionIdleTimeoutInMinutes": 0,
+    "SessionIdleTimeoutInMinutes": 43200,
     "WebsocketSecurePort": 443,
     "WebsocketPort": 80,
     "WebserverMode": "gzip",
@@ -124,25 +124,32 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "RestrictPostDelete": "all",
     "AllowEditPost": "always",
     "PostEditTimeLimit": -1,
-    "ExperimentalEnableAuthenticationTransfer": true,
     "TimeBetweenUserTypingUpdatesMilliseconds": 5000,
     "EnablePostSearch": true,
+    "MinimumHashtagLength": 3,
     "EnableUserTypingMessages": true,
     "EnableChannelViewedMessages": true,
     "EnableUserStatuses": true,
+    "ExperimentalEnableAuthenticationTransfer": true,
     "ClusterLogTimeoutMilliseconds": 2000,
-    "EnablePreviewFeatures": true,
     "CloseUnusedDirectMessages": false,
+    "EnablePreviewFeatures": true,
     "EnableTutorial": true,
     "ExperimentalEnableDefaultChannelLeaveJoinMessages": true,
     "ExperimentalGroupUnreadChannels": "disabled",
     "ExperimentalChannelOrganization": false,
     "ImageProxyType": "",
-    "ImageProxyOptions": "",
     "ImageProxyURL": "",
+    "ImageProxyOptions": "",
     "EnableAPITeamDeletion": false,
     "ExperimentalEnableHardenedMode": false,
-    "EnableEmailInvitations": false
+    "DisableLegacyMFA": true,
+    "ExperimentalStrictCSRFEnforcement": false,
+    "EnableEmailInvitations": false,
+    "ExperimentalLdapGroupSync": false,
+    "DisableBotsWhenOwnerIsDeactivated": true,
+    "EnableBotAccountCreation": false,
+    "EnableSVGs": false
   },
   "TeamSettings": {
     "SiteName": "Mattermost",
@@ -175,11 +182,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "ExperimentalHideTownSquareinLHS": false,
     "ExperimentalTownSquareIsReadOnly": false,
     "ExperimentalPrimaryTeam": "",
-    "ExperimentalDefaultChannels": ""
-  },
-  "DisplaySettings": {
-    "CustomUrlSchemes": [],
-    "ExperimentalTimezone": false
+    "ExperimentalDefaultChannels": []
   },
   "ClientRequirements": {
     "AndroidLatestVersion": "",
@@ -203,7 +206,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
   },
   "LogSettings": {
     "EnableConsole": true,
-    "ConsoleLevel": "DEBUG",
+    "ConsoleLevel": "INFO",
     "ConsoleJson": true,
     "EnableFile": true,
     "FileLevel": "INFO",
@@ -212,12 +215,21 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "EnableWebhookDebugging": true,
     "EnableDiagnostics": true
   },
+  "NotificationLogSettings": {
+    "EnableConsole": true,
+    "ConsoleLevel": "INFO",
+    "ConsoleJson": true,
+    "EnableFile": true,
+    "FileLevel": "INFO",
+    "FileJson": true,
+    "FileLocation": ""
+  },
   "PasswordSettings": {
-    "MinimumLength": 5,
-    "Lowercase": false,
-    "Number": false,
-    "Uppercase": false,
-    "Symbol": false
+    "MinimumLength": 10,
+    "Lowercase": true,
+    "Number": true,
+    "Uppercase": true,
+    "Symbol": true
   },
   "FileSettings": {
     "EnableFileAttachments": true,
@@ -243,19 +255,19 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "EnableSignUpWithEmail": true,
     "EnableSignInWithEmail": true,
     "EnableSignInWithUsername": true,
-    "SendEmailNotifications": true,
+    "SendEmailNotifications": false,
     "UseChannelInEmailNotifications": false,
     "RequireEmailVerification": false,
     "FeedbackName": "",
-    "FeedbackEmail": "test@example.com",
+    "FeedbackEmail": "",
+    "ReplyToAddress": "",
     "FeedbackOrganization": "",
     "EnableSMTPAuth": false,
     "SMTPUsername": "",
     "SMTPPassword": "",
-    "SMTPServer": "dockerhost",
-    "SMTPPort": "2500",
+    "SMTPServer": "",
+    "SMTPPort": "",
     "ConnectionSecurity": "",
-    "InviteSalt": "",
     "SendPushNotifications": true,
     "PushNotificationServer": "https://push-test.mattermost.com",
     "PushNotificationContents": "generic",
@@ -265,9 +277,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "EnablePreviewModeBanner": true,
     "SkipServerCertificateVerification": false,
     "EmailNotificationContentsType": "full",
-    "LoginButtonColor": "",
-    "LoginButtonBorderColor": "",
-    "LoginButtonTextColor": ""
+    "LoginButtonColor": "#0000",
+    "LoginButtonBorderColor": "#2389D7",
+    "LoginButtonTextColor": "#2389D7"
   },
   "RateLimitSettings": {
     "Enable": false,
@@ -288,7 +300,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "AboutLink": "https://about.mattermost.com/default-about/",
     "HelpLink": "https://about.mattermost.com/default-help/",
     "ReportAProblemLink": "https://about.mattermost.com/default-report-a-problem/",
-    "SupportEmail": "feedback@mattermost.com"
+    "SupportEmail": "feedback@mattermost.com",
+    "CustomTermsOfServiceEnabled": false,
+    "CustomTermsOfServiceReAcceptancePeriod": 365
   },
   "AnnouncementSettings": {
     "EnableBanner": false,
@@ -302,9 +316,6 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "DefaultTheme": "default",
     "AllowCustomThemes": true,
     "AllowedThemes": []
-  },
-  "TimezoneSettings": {
-    "SupportedTimezonesPath": "timezones.json"
   },
   "GitLabSettings": {
     "Enable": false,
@@ -322,7 +333,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "Scope": "profile email",
     "AuthEndpoint": "https://accounts.google.com/o/oauth2/v2/auth",
     "TokenEndpoint": "https://www.googleapis.com/oauth2/v4/token",
-    "UserApiEndpoint": "https://www.googleapis.com/plus/v1/people/me"
+    "UserApiEndpoint": "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata"
   },
   "Office365Settings": {
     "Enable": false,
@@ -343,6 +354,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "BindUsername": "",
     "BindPassword": "",
     "UserFilter": "",
+    "GroupFilter": "",
+    "GroupDisplayNameAttribute": "",
+    "GroupIdAttribute": "",
     "FirstNameAttribute": "",
     "LastNameAttribute": "",
     "EmailAttribute": "",
@@ -356,9 +370,10 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "QueryTimeout": 60,
     "MaxPageSize": 0,
     "LoginFieldName": "",
-    "LoginButtonColor": "",
-    "LoginButtonBorderColor": "",
-    "LoginButtonTextColor": ""
+    "LoginButtonColor": "#0000",
+    "LoginButtonBorderColor": "#2389D7",
+    "LoginButtonTextColor": "#2389D7",
+    "Trace": false
   },
   "ComplianceSettings": {
     "Enable": false,
@@ -376,6 +391,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "EnableSyncWithLdapIncludeAuth": false,
     "Verify": true,
     "Encrypt": true,
+    "SignRequest": false,
     "IdpUrl": "",
     "IdpDescriptorUrl": "",
     "AssertionConsumerServiceURL": "",
@@ -393,9 +409,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "LocaleAttribute": "",
     "PositionAttribute": "",
     "LoginButtonText": "SAML",
-    "LoginButtonColor": "",
-    "LoginButtonBorderColor": "",
-    "LoginButtonTextColor": ""
+    "LoginButtonColor": "#34a28b",
+    "LoginButtonBorderColor": "#2389D7",
+    "LoginButtonTextColor": "#ffffff"
   },
   "NativeAppSettings": {
     "AppDownloadLink": "https://about.mattermost.com/downloads/",
@@ -406,6 +422,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "Enable": false,
     "ClusterName": "",
     "OverrideHostname": "",
+    "NetworkInterface": "",
+    "BindAddress": "",
+    "AdvertiseAddress": "",
     "UseIpAddress": true,
     "UseExperimentalGossip": false,
     "ReadOnlyConfig": true,
@@ -423,7 +442,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
   "ExperimentalSettings": {
     "ClientSideCertEnable": false,
     "ClientSideCertCheck": "secondary",
-    "EnablePostMetadata": false
+    "EnableClickToReply": false,
+    "LinkMetadataTimeoutMilliseconds": 5000,
+    "RestrictSystemAdmin": false
   },
   "AnalyticsSettings": {
     "MaxUsersForStatistics": 2500
@@ -434,15 +455,22 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "Password": "changeme",
     "EnableIndexing": false,
     "EnableSearching": false,
+    "EnableAutocomplete": false,
     "Sniff": true,
     "PostIndexReplicas": 1,
     "PostIndexShards": 1,
+    "ChannelIndexReplicas": 1,
+    "ChannelIndexShards": 1,
+    "UserIndexReplicas": 1,
+    "UserIndexShards": 1,
     "AggregatePostsAfterDays": 365,
     "PostsAggregatorJobStartTime": "03:00",
     "IndexPrefix": "",
     "LiveIndexingBatchSize": 1,
     "BulkIndexingTimeWindowSeconds": 3600,
-    "RequestTimeoutSeconds": 30
+    "RequestTimeoutSeconds": 30,
+    "SkipTLSVerification": false,
+    "Trace": ""
   },
   "DataRetentionSettings": {
     "EnableMessageDeletion": false,
@@ -453,9 +481,9 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
   },
   "MessageExportSettings": {
     "EnableExport": false,
+    "ExportFormat": "actiance",
     "DailyRunTime": "01:00",
     "ExportFromTimestamp": 0,
-    "FileLocation": "export",
     "BatchSize": 10000,
     "GlobalRelaySettings": {
       "CustomerType": "A9",
@@ -471,12 +499,32 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
   "PluginSettings": {
     "Enable": true,
     "EnableUploads": false,
+    "AllowInsecureDownloadUrl": false,
+    "EnableHealthCheck": true,
     "Directory": "./plugins",
     "ClientDirectory": "./client/plugins",
     "Plugins": {},
-    "PluginStates": {}
+    "PluginStates": {
+      "com.mattermost.nps": {
+        "Enable": true
+      }
+    }
+  },
+  "DisplaySettings": {
+    "CustomUrlSchemes": [],
+    "ExperimentalTimezone": false
+  },
+  "ImageProxySettings": {
+    "Enable": false,
+    "ImageProxyType": "local",
+    "RemoteImageProxyURL": "",
+    "RemoteImageProxyOptions": ""
   }
 }
+
+
+   
+
 
 EOF
 
