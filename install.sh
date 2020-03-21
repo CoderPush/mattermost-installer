@@ -6,6 +6,14 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
+#get the domain name
+
+echo domain name to install mattermost (eg: mm.example.com)
+
+read domainname
+
+
+
 #update the packages
 apt update -y
 apt upgrade -y
@@ -74,3 +82,4 @@ rm renewcert
 #update the packages
 apt update -y
 apt update -y
+
