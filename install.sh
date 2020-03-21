@@ -12,6 +12,10 @@ echo domain name to install mattermost
 
 read domainname
 
+echo 
+
+echo Installing Mattermost for $domainname
+
 
 
 #update the packages
