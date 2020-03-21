@@ -8,7 +8,7 @@ fi
 
 #get the domain name
 
-echo domain name to install mattermost:
+echo domain name to install mattermost
 
 read domainname
 
