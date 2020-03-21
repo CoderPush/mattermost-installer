@@ -8,7 +8,7 @@ fi
 
 #get the domain name
 
-echo domain name to install mattermost (eg: mm.example.com)
+echo domain name to install mattermost:
 
 read domainname
 
@@ -82,4 +82,7 @@ rm renewcert
 #update the packages
 apt update -y
 apt update -y
+
+#
+
 
