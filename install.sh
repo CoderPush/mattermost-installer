@@ -37,6 +37,12 @@ echo
 
 echo STARTING MATTERMOST INSTALLATION FOR $domain
 
+echo
+
+echo
+
+echo
+
 
 
 #update the packages
@@ -55,10 +61,7 @@ mv mattermost /opt
 #move extracted mattermost to opt
 mkdir /opt/mattermost/data
 
-#add new user:mattermost and grant permissions
-useradd --system --user-group mattermost
-chown -R mattermost:mattermost /opt/mattermost
-sudo chmod -R g+w /opt/mattermost
+/opt/mattermost/config/config.json
 
 #make config.json for mm
 
@@ -521,12 +524,12 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     "RemoteImageProxyOptions": ""
   }
 }
-
-
-   
-
-
 EOF
+
+#add new user:mattermost and grant permissions
+useradd --system --user-group mattermost
+chown -R mattermost:mattermost /opt/mattermost
+sudo chmod -R g+w /opt/mattermost
 
 
 # mattermost.service
@@ -638,6 +641,10 @@ EOF
 
 ln -s /etc/nginx/sites-available/mattermost.conf /etc/nginx/sites-enabled/mattermost.conf
 
+#restart nginx
+nginx -t
+service nginx restart
+
 #install certbot
 add-apt-repository ppa:certbot/certbot -y
 apt update -y
@@ -741,10 +748,7 @@ server {
          proxy_pass http://backend;
     }
 }
-
 EOF
-
-
 
 #write out current crontab
 crontab -l > renewcert
@@ -753,6 +757,10 @@ echo "0 0,12 * * * certbot renew >/dev/null 2>&1" >> renewcert
 #install new cron file
 crontab renewcert
 rm renewcert
+
+#restart nginx
+nginx -t
+service nginx restart
 
 #update the packages
 apt update -y
