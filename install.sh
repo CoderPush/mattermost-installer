@@ -6,6 +6,8 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+
 #get the domain name
 
 echo 
@@ -16,7 +18,7 @@ read -p 'ENTER DOMAIN NAME WITHOUT WWW PREFIX (eg: mm.example.com) : ' domain
 
 echo
 
-read -p 'ENTER DATABASE LIGHTSAIL ENDPOINT   : ' dbpath
+read -p 'ENTER SQL CLOUD INSTANCE ENDPOINT   : ' dbpath
 
 echo
 
@@ -28,7 +30,7 @@ read -p 'ENTER DATABASE NAME : ' dbname
 
 echo
 
-read -sp 'ENTER DATABASE NAME : ' dbpassword
+read -sp 'ENTER DATABASE PASSWORD : ' dbpassword
 
 echo
 
@@ -60,7 +62,7 @@ sudo chmod -R g+w /opt/mattermost
 
 #make config.json for mm
 
-tee / > /dev/null <<EOF
+tee /opt/mattermost/config/config.json > /dev/null <<EOF
 
 {
   "ServiceSettings": {
