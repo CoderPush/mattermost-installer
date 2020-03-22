@@ -41,8 +41,6 @@ echo STARTING MATTERMOST INSTALLATION FOR $domain
 
 echo
 
-
-
 echo
 
 
@@ -800,3 +798,12 @@ service nginx restart
 apt update -y
 apt update -y
 
+echo
+
+echo
+
+echo Successfully Installed Mattermost on $domain
+
+echo
+
+echo
