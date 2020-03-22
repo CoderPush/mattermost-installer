@@ -1,4 +1,4 @@
-# mattermost-installer
+# Mattermost-installer
 Mattermost Automatic Installer for Enterprise on Ubuntu 16+ &amp; External Mysql Instance.
 
 # Requirements
