@@ -41,6 +41,9 @@ echo
 
 echo
 
+echo
+
+
 
 #update the packages
 apt update -y
@@ -683,7 +686,7 @@ apt install python-certbot-nginx -y
 
 #issue new certs
 
-certbot --register-unsafely-without-email --nginx certonly --agree-tos -d $domain
+certbot --register-unsafely-without-email --nginx certonly --agree-tos -d $domain 
 
 #create new nginx server block
 
@@ -794,8 +797,4 @@ service nginx restart
 #update the packages
 apt update -y
 apt update -y
-
-#end
-
-echo Congratulations! Mattermost is succesfully installed at $domain
 
