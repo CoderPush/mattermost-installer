@@ -61,7 +61,7 @@ mv mattermost /opt
 #move extracted mattermost to opt
 mkdir /opt/mattermost/data
 
-/opt/mattermost/config/config.json
+rm -rf /opt/mattermost/config/config.json
 
 #make config.json for mm
 
