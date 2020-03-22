@@ -198,7 +198,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     },
     "SqlSettings": {
         "DriverName": "mysql",
-        "DataSource": "$dbadmin:$dbpassword@($dbname:3306)/$dbname?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",
+        "DataSource": "$dbadmin:$dbpassword@($dbpath:3306)/$dbname?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": 20,
