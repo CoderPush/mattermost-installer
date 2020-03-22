@@ -8,6 +8,20 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
+
+# code is color code of the bar.
+code=15
+
+# function to calculate percentile completion
+calcPer()
+{
+# declare a variable to count on
+ local c=$1
+# calculate percentile
+ per=$(echo "scale=2;$c / $n * 100"|bc -l)
+}
+
+
 #get the domain name
 
 echo 
@@ -43,7 +57,22 @@ echo
 
 echo
 
-
+# start loop
+# n=no of tasks 
+# So, if you are processing a file n=no of lines in that file.
+#
+while [ $n -ge $i ]; do
+ calcPer $i
+ # call a small sleep to let people see the beauty of progress bar in action.
+ sleep .5
+ # print the color every time a task is done.
+ printf "|\e[48;5;${code}m%${per%.*}s\e[31m${per%.*}"
+ # make room for more, so escape the return. 
+ printf '%s\e[0m%s\r' "%" "|" 
+ # finally increament the counter for the next task in pipeline.
+ echo $((i+=1)) >/dev/null
+done
+printf '\n'
 
 #update the packages
 apt update -y
