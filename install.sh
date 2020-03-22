@@ -63,7 +63,7 @@ mkdir /opt/mattermost/data
 
 #make config.json for mm
 
-tee /opt/mattermost/config/config.json > /dev/null <<EOF
+echo'
 {
     "ServiceSettings": {
         "SiteURL": "https:$domain",
@@ -546,8 +546,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
         "RemoteImageProxyURL": "",
         "RemoteImageProxyOptions": ""
     }
-}
-EOF
+}' > /opt/mattermost/config/config.json 
 
 #add new user:mattermost and grant permissions
 useradd --system --user-group mattermost
@@ -556,8 +555,8 @@ sudo chmod -R g+w /opt/mattermost
 
 
 # mattermost.service
-tee /lib/systemd/system/mattermost.service > /dev/null << EOF
-
+echo"
+[Unit]
 Description=Mattermost
 After=network.target
 
@@ -573,9 +572,7 @@ Group=mattermost
 LimitNOFILE=49152
 
 [Install]
-WantedBy=multi-user.target
-
-EOF
+WantedBy=multi-user.target" > /lib/systemd/system/mattermost.service
 
 
 #reload daemon
