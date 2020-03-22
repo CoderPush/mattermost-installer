@@ -61,8 +61,6 @@ mv mattermost /opt
 #move extracted mattermost to opt
 mkdir /opt/mattermost/data
 
-rm -rf /opt/mattermost/config/config.json
-
 #make config.json for mm
 
 tee /opt/mattermost/config/config.json > /dev/null <<EOF
@@ -558,7 +556,8 @@ sudo chmod -R g+w /opt/mattermost
 
 
 # mattermost.service
-echo "[Unit]
+tee /lib/systemd/system/mattermost.service > /dev/null << EOF
+
 Description=Mattermost
 After=network.target
 
@@ -574,7 +573,9 @@ Group=mattermost
 LimitNOFILE=49152
 
 [Install]
-WantedBy=multi-user.target" > /lib/systemd/system/mattermost.service
+WantedBy=multi-user.target
+
+EOF
 
 
 #reload daemon
