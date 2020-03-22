@@ -598,8 +598,9 @@ apt upgrade -y
 
 #install nginx
 apt install nginx -y
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
+
+rm -rf /etc/nginx/sites-enabled/default
+rm -rf /etc/nginx/sites-available/default
 
 tee /etc/nginx/sites-available/mattermost.conf > /dev/null <<EOF
 
@@ -670,12 +671,16 @@ ln -s /etc/nginx/sites-available/mattermost.conf /etc/nginx/sites-enabled/matter
 
 #restart nginx
 nginx -t
+
 service nginx restart
 
 #install certbot
 add-apt-repository ppa:certbot/certbot -y
+
 apt update -y
+
 apt upgrade -y
+
 apt install python-certbot-nginx -y
 
 
