@@ -686,7 +686,7 @@ apt install python-certbot-nginx -y
 
 #issue new certs
 
-certbot --nginx certonly --agree-tos -d $domain
+certbot --register-unsafely-without-email --nginx certonly --agree-tos -d $domain
 
 #create new nginx server block
 
