@@ -575,7 +575,7 @@ Group=mattermost
 LimitNOFILE=49152
 
 [Install]
-WantedBy=multi-user.target" > /lib/systemd/system/mattermost.service
+WantedBy= multi-user.target
 
 EOF
 
