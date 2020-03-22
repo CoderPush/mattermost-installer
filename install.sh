@@ -66,7 +66,7 @@ mkdir /opt/mattermost/data
 tee /opt/mattermost/config/config.json > /dev/null <<EOF
 {
     "ServiceSettings": {
-        "SiteURL": "https:$domain",
+        "SiteURL": "https://$domain",
         "WebsocketURL": "",
         "LicenseFileLocation": "",
         "ListenAddress": ":8065",
@@ -546,7 +546,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
         "RemoteImageProxyURL": "",
         "RemoteImageProxyOptions": ""
     }
-}'
+}
 
 EOF
 
