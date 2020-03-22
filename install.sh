@@ -35,11 +35,13 @@ read -sp 'ENTER DATABASE PASSWORD : ' dbpassword
 
 echo
 
+echo
+
 echo STARTING MATTERMOST INSTALLATION FOR $domain
 
 echo
 
-echo
+
 
 echo
 
