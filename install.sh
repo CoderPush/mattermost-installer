@@ -686,7 +686,7 @@ apt install python-certbot-nginx -y
 
 #issue new certs
 
-certbot --nginx certonly
+certbot --nginx certonly --agree-tos
 
 #create new nginx server block
 
