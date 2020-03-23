@@ -4,7 +4,7 @@ Mattermost Installer is a set of installers for deploying Mattermost on your ins
 ## Available Versions
 
 1. Enterprise Usecase (Compute, SQL and Storage Instances are separated)
-2. Normal Installtion (Compute, SQL and Storage in a single instance)
+2. Normal Installation (Compute, SQL and Storage in a single instance)
 
 
 
