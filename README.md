@@ -1,13 +1,16 @@
 # Mattermost-installer
-Mattermost Automatic Installer for Enterprise on Ubuntu 16+ &amp; External Mysql Instance.
+Mattermost Installer is a set of installers for deploying Mattermost on your instances.
 
-# Requirements
-1. Ubuntu 16+ Instance
-2. MySQL Instance 
+## Available Versions
 
-# Run the Installer
+1. Enterprise Usecase (Compute, SQL and Storage Instances are separated)
+2. Normal Installtion (Compute, SQL and Storage in a single instance)
+
+
+
+# Enterprise Installer
 
 ```
-wget https://raw.githubusercontent.com/thesuhailcompany/mattermost-installer/master/install.sh; sudo chmod +x install.sh; sudo ./install.sh
+wget https://raw.githubusercontent.com/chinyasuhail/mattermost-installer/master/enterprise-installer/install.sh; sudo chmod +x install.sh; sudo ./install.sh
 ```
 
