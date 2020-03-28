@@ -620,7 +620,7 @@ server {
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection "upgrade";
 
-        client_max_body_size 50M;
+        client_max_body_size 0;
 
         proxy_set_header Host '\$http_host';
         proxy_set_header X-Real-IP '\$remote_addr';
@@ -641,7 +641,7 @@ server {
     }
 
     location / {
-        client_max_body_size 50M;
+        client_max_body_size 0;
 
         proxy_set_header Connection "";
         proxy_set_header Host \$http_host;
@@ -796,7 +796,7 @@ service nginx restart
 
 #update the packages
 apt update -y
-apt update -y
+apt upgrade -y
 
 echo
 
