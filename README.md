@@ -11,6 +11,6 @@ Mattermost Installer is a set of installers for deploying Mattermost on your ins
 # Enterprise Installer
 
 ```
-wget https://raw.githubusercontent.com/chinyasuhail/mattermost-installer/master/enterprise-installer/install.sh; sudo chmod +x install.sh; sudo ./install.sh
+wget https://github.com/The-Bash-Project/mattermost-installer/releases/download/v1.0/install.sh; sudo chmod +x install.sh; sudo ./install.sh
 ```
 
