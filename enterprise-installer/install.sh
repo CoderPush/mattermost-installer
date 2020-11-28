@@ -674,10 +674,6 @@ nginx -t
 
 service nginx restart
 
-#install certbot
-apt-add-repository ppa:certbot/certbot -y
-
-
 apt update -y
 
 apt upgrade -y
