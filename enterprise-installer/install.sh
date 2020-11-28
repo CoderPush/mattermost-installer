@@ -50,7 +50,7 @@ apt update -y
 apt upgrade -y
 
 #get the latest release of mattermost open source team edition
-wget https://releases.mattermost.com/5.21.0/mattermost-team-5.21.0-linux-amd64.tar.gz
+wget https://releases.mattermost.com/5.29.0/mattermost-team-5.29.0-linux-amd64.tar.gz
 
 #unzip the installed package
 tar -xvzf mattermost*.gz
