@@ -197,8 +197,8 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
         "IosMinVersion": ""
     },
     "SqlSettings": {
-        "DriverName": "mysql",
-        "DataSource": "$dbadmin:$dbpassword@($dbpath:3306)/$dbname?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",
+        "DriverName": "postgres",
+        "DataSource": "$dbadmin:$dbpassword@($dbpath:5432)/$dbname?sslmode=disable&connect_timeout=10",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": 20,
