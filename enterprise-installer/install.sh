@@ -198,7 +198,7 @@ tee /opt/mattermost/config/config.json > /dev/null <<EOF
     },
     "SqlSettings": {
         "DriverName": "postgres",
-        "DataSource": "$dbadmin:$dbpassword@($dbpath:5432)/$dbname?sslmode=disable&connect_timeout=10",
+        "DataSource": "postgresql://$dbadmin:$dbpassword@$dbpath:5432/$dbname?sslmode=disable&connect_timeout=10",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": 20,
@@ -675,13 +675,15 @@ nginx -t
 service nginx restart
 
 #install certbot
-add-apt-repository ppa:certbot/certbot -y
+apt-add-repository ppa:certbot/certbot -y
+
 
 apt update -y
 
 apt upgrade -y
 
-apt install python-certbot-nginx -y
+apt install python3-certbot-nginx -y
+
 
 
 #issue new certs
